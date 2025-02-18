@@ -4,14 +4,6 @@ import styles from "./FramerDrag.module.css";
 import { motion } from "framer-motion";
 
 export const FramerDrag = () => {
-  return (
-    <div>
-      <DnDBoard />
-    </div>
-  );
-};
-
-const DnDBoard = () => {
   const [data, setData] = useState<Board>(initialState);
   return (
     <div className={styles.board}>

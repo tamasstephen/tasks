@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { Board, Item, initialState, Key } from "../data/data";
 import styles from "./FramerDrag.module.css";
 import { motion } from "framer-motion";
@@ -117,6 +117,7 @@ const BoardColumn = ({
         ],
       }));
     }
+    setNearestCard(null);
   };
 
   const getColumnCards = (columnId: Key) => {
@@ -143,6 +144,7 @@ const BoardColumn = ({
           columnId={columnId}
           handleDragStart={handleDragStart}
           setNearestCard={setNearestCard}
+          nearestCard={nearestCard}
         />
       ))}
     </motion.div>
@@ -159,11 +161,13 @@ const BoardItem = ({
   handleDragStart,
   columnId,
   setNearestCard,
+  nearestCard,
 }: {
   data: Item;
   columnId: Key;
   handleDragStart: (e: React.DragEvent<HTMLDivElement>, item: Item) => void;
-  setNearestCard: (card: HTMLElement) => void;
+  setNearestCard: (card: HTMLElement | null) => void;
+  nearestCard: HTMLElement | null;
 }) => {
   const thisCard = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<boolean>(false);
@@ -185,6 +189,12 @@ const BoardItem = ({
     console.log("CALLED end");
     setActive(false);
   };
+
+  useEffect(() => {
+    if (!nearestCard || nearestCard.dataset.cardId !== data.id.toString()) {
+      setActive(false);
+    }
+  }, [nearestCard, data]);
 
   return (
     <motion.div

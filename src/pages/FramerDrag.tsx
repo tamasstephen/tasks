@@ -181,7 +181,7 @@ const BoardItem = ({
     setNearestCard(null);
   };
 
-  const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragEnd = () => {
     console.log("CALLED end");
     setActive(false);
   };
@@ -190,7 +190,7 @@ const BoardItem = ({
     <motion.div
       draggable="true"
       className={styles.item}
-      onDragEnd={handleDragEnd}
+      onDragEndCapture={handleDragEnd}
       onDragStart={(e) =>
         handleDragStart(e as unknown as React.DragEvent<HTMLDivElement>, data)
       }

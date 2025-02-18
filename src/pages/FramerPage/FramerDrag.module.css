@@ -15,7 +15,8 @@
 }
 
 .column {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
     background-color: #f2f2f2;
     padding: 1rem;
@@ -37,4 +38,5 @@
     box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.05);
     cursor: grab;
     background-color: white;
+    height: 250px;
 }

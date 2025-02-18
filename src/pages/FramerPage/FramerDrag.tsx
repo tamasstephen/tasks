@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { Board, Item, initialState, Key } from "../data/data";
+import { Board, Item, initialState, Key } from "../../data/data";
 import styles from "./FramerDrag.module.css";
 import { motion } from "framer-motion";
 
@@ -64,7 +64,6 @@ const BoardColumn = ({
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log("COLUMN ID", columnId);
     e.preventDefault();
     setActive(false);
     const item = JSON.parse(e.dataTransfer.getData("item"));
@@ -74,7 +73,6 @@ const BoardColumn = ({
       (card) => cardId.toString() === (card as HTMLElement).dataset.cardId,
     );
     if (isCardInColumn) {
-      console.log("CARD IS IN COLUMN");
       const card = boardData[columnId].find(
         (card) => cardId.toString() === card.id.toString(),
       );
@@ -129,9 +127,7 @@ const BoardColumn = ({
   return (
     <motion.div
       variants={variants}
-      initial="inactive"
       animate={active ? "active" : "inactive"}
-      layout
       className={styles.column}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
@@ -152,8 +148,8 @@ const BoardColumn = ({
 };
 
 const cardVariants = {
-  active: { backgroundColor: "rgba(0, 0, 255, 0.2)" },
-  inactive: { backgroundColor: "#fff" },
+  active: { backgroundColor: "rgba(0, 0, 255, 0.2)", height: "250px" },
+  inactive: { backgroundColor: "#fff", height: "250px" },
 };
 
 const BoardItem = ({
@@ -173,20 +169,17 @@ const BoardItem = ({
   const [active, setActive] = useState<boolean>(false);
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log("CALLED over");
     setActive(true);
     setNearestCard(thisCard.current as HTMLElement);
   };
 
   const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log("CALLED end");
     setActive(false);
     setNearestCard(null);
   };
 
   const handleDragEnd = () => {
-    console.log("CALLED end");
     setActive(false);
   };
 
@@ -204,6 +197,7 @@ const BoardItem = ({
       onDragStart={(e) =>
         handleDragStart(e as unknown as React.DragEvent<HTMLDivElement>, data)
       }
+      layout
       onDragLeave={handleDragLeave}
       animate={active ? "active" : "inactive"}
       onDragOver={handleDragOver}

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createSwapy, Swapy, utils } from "swapy";
-import { initialState } from "../data/data";
-import { toSlottedItems } from "../utils/toSlottedItems";
+import { initialState } from "../../data/data";
+import { toSlottedItems } from "../../utils/toSlottedItems";
 
 export const SwappyDrag = () => {
   const [data] = useState([...initialState.does, ...initialState.wants]);

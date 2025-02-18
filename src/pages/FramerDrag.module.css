@@ -1,0 +1,40 @@
+.board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 2px solid #f0f0f0;
+}
+
+.board-inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.column {
+    display: grid;
+    gap: 0.5rem;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.column.active {
+    background-color: blue;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    gap: 0.5rem;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.05);
+    cursor: grab;
+    background-color: white;
+}

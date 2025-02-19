@@ -10,104 +10,123 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as BoardImport } from "./routes/board";
-import { Route as IndexImport } from "./routes/index";
-import { Route as FilesSplatImport } from "./routes/files/$";
+import { Route as rootRoute } from './routes/__root'
+import { Route as BoardImport } from './routes/board'
+import { Route as IndexImport } from './routes/index'
+import { Route as WorkspacesIndexImport } from './routes/workspaces/index'
+import { Route as FilesSplatImport } from './routes/files/$'
 
 // Create/Update Routes
 
 const BoardRoute = BoardImport.update({
-  id: "/board",
-  path: "/board",
+  id: '/board',
+  path: '/board',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
+
+const WorkspacesIndexRoute = WorkspacesIndexImport.update({
+  id: '/workspaces/',
+  path: '/workspaces/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const FilesSplatRoute = FilesSplatImport.update({
-  id: "/files/$",
-  path: "/files/$",
+  id: '/files/$',
+  path: '/files/$',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/board": {
-      id: "/board";
-      path: "/board";
-      fullPath: "/board";
-      preLoaderRoute: typeof BoardImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/files/$": {
-      id: "/files/$";
-      path: "/files/$";
-      fullPath: "/files/$";
-      preLoaderRoute: typeof FilesSplatImport;
-      parentRoute: typeof rootRoute;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/board': {
+      id: '/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof BoardImport
+      parentRoute: typeof rootRoute
+    }
+    '/files/$': {
+      id: '/files/$'
+      path: '/files/$'
+      fullPath: '/files/$'
+      preLoaderRoute: typeof FilesSplatImport
+      parentRoute: typeof rootRoute
+    }
+    '/workspaces/': {
+      id: '/workspaces/'
+      path: '/workspaces'
+      fullPath: '/workspaces'
+      preLoaderRoute: typeof WorkspacesIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/board": typeof BoardRoute;
-  "/files/$": typeof FilesSplatRoute;
+  '/': typeof IndexRoute
+  '/board': typeof BoardRoute
+  '/files/$': typeof FilesSplatRoute
+  '/workspaces': typeof WorkspacesIndexRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/board": typeof BoardRoute;
-  "/files/$": typeof FilesSplatRoute;
+  '/': typeof IndexRoute
+  '/board': typeof BoardRoute
+  '/files/$': typeof FilesSplatRoute
+  '/workspaces': typeof WorkspacesIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/board": typeof BoardRoute;
-  "/files/$": typeof FilesSplatRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/board': typeof BoardRoute
+  '/files/$': typeof FilesSplatRoute
+  '/workspaces/': typeof WorkspacesIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/board" | "/files/$";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/board" | "/files/$";
-  id: "__root__" | "/" | "/board" | "/files/$";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/board' | '/files/$' | '/workspaces'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/board' | '/files/$' | '/workspaces'
+  id: '__root__' | '/' | '/board' | '/files/$' | '/workspaces/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  BoardRoute: typeof BoardRoute;
-  FilesSplatRoute: typeof FilesSplatRoute;
+  IndexRoute: typeof IndexRoute
+  BoardRoute: typeof BoardRoute
+  FilesSplatRoute: typeof FilesSplatRoute
+  WorkspacesIndexRoute: typeof WorkspacesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BoardRoute: BoardRoute,
   FilesSplatRoute: FilesSplatRoute,
-};
+  WorkspacesIndexRoute: WorkspacesIndexRoute,
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/board",
-        "/files/$"
+        "/files/$",
+        "/workspaces/"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/files/$": {
       "filePath": "files/$.tsx"
+    },
+    "/workspaces/": {
+      "filePath": "workspaces/index.tsx"
     }
   }
 }

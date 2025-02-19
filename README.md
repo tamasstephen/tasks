@@ -1,50 +1,38 @@
-# React + TypeScript + Vite
+# Kanban Board with Drag and Drop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Kanban Board Preview](./public/image.png)
 
-Currently, two official plugins are available:
+A Kanban board implementation with smooth drag-and-drop functionality, built with React and TypeScript.
+The goal is to practice different drag and drop solutions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Technologies
 
-## Expanding the ESLint configuration
+- **React 18** - Frontend framework
+- **TypeScript** - Type safety and better developer experience
+- **Framer Motion** - Smooth animations and drag-and-drop interactions
+- **CSS Modules** - Scoped styling solution
+- **Vite** - Build tool and development server
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🎨 Features
 
-- Configure the top-level `parserOptions` property like this:
+- Drag and drop tasks between columns
+- Priority-based task styling
+- Responsive design
+- Custom IBM Plex Mono typography
+- Purple-themed modern UI
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠️ Setup
+
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+3. Run the development server:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
+

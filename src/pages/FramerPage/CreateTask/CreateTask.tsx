@@ -1,6 +1,16 @@
 import { Priority } from "@/types/priority";
 import { Task } from "@/types/task";
 import styles from "./CreateTask.module.css";
+import { RiCloseFill } from "@remixicon/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const schema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  description: z.string().min(1, { message: "Description is required" }),
+  priority: z.nativeEnum(Priority, { message: "Priority is required" }),
+});
 
 export const CreateTask = ({
   addTask,
@@ -9,13 +19,21 @@ export const CreateTask = ({
   addTask: (task: Omit<Task, "id" | "status">) => void;
   onClose: () => void;
 }) => {
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+  const { register, handleSubmit, formState } = useForm<z.infer<typeof schema>>(
+    {
+      defaultValues: {
+        name: "",
+        description: "",
+        priority: Priority.MEDIUM,
+      },
+      mode: "onSubmit",
+      resolver: zodResolver(schema),
+    },
+  );
+
+  const onSubmit = (data: z.infer<typeof schema>) => {
     const task = {
-      name: formData.get("title") as string,
-      description: formData.get("description") as string,
-      priority: formData.get("priority") as Priority,
+      ...data,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -25,23 +43,39 @@ export const CreateTask = ({
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={onSubmit} className={styles.form}>
+      <RiCloseFill className={styles.close} size={24} onClick={onClose} />
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <input
           type="text"
           placeholder="Task Name"
-          name="title"
-          className={styles.input}
+          {...register("name")}
+          className={`${styles.input} ${formState.errors.name && styles.error}`}
         />
+        {formState.errors.name && (
+          <p className={styles["error-text"]}>
+            {formState.errors.name.message}
+          </p>
+        )}
         <textarea
           placeholder="Task Description"
-          name="description"
-          className={styles.textarea}
+          {...register("description")}
+          className={`${styles.textarea} ${formState.errors.description && styles.error}`}
         />
-        <select name="priority" id="priority" className={styles.select}>
+        {formState.errors.description && (
+          <p className={styles["error-text"]}>
+            {formState.errors.description.message}
+          </p>
+        )}
+        <select {...register("priority")} className={styles.select}>
           {Object.values(Priority).map((prio) => (
             <option value={prio}>{prio.toLowerCase()}</option>
           ))}
         </select>
+        {formState.errors.priority && (
+          <p className={styles["error-text"]}>
+            {formState.errors.priority.message}
+          </p>
+        )}
         <button type="submit" className={styles.button}>
           Create Task
         </button>

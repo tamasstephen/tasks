@@ -1,11 +1,42 @@
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("@/assets/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "IBMPlexSans Bold";
+  src: url("@/assets/fonts/IBMPlexMono-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "IBMPlexSans Medium";
+  src: url("@/assets/fonts/IBMPlexMono-Medium.ttf") format("truetype");
+}
+
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  font-family: "IBMPlexMono" ,Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --font-regular: "IBMPlexMono";
+  --font-bold: "IBMPlexSans Bold";
+  --font-medium: "IBMPlexSans Medium";
+
+  /* Colors */
+  --primary-color: #6b46c1;         /* Main purple */
+  --primary-light: #9f7aea;         /* Light purple */
+  --primary-dark: #553c9a;          /* Dark purple */
+  --primary-hover: #805ad5;         /* Purple hover state */
+  --primary-transparent: rgba(107, 70, 193, 0.1); /* Transparent purple */
+  --secondary-blue-light: #b794f4;   /* Soft lavender */
+  --neutral-gray: #f9f9f9;
+  --accent-medium: #9061f9;           /* Purple-tinted success */
+  --accent-light: #d6bcfa;          /* Soft purple highlight */
+  --accent-red: #b83280;             /* Purple-tinted error */
+
+  --shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,21 +44,28 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary-color);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--primary-hover);
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 h1 {
@@ -47,31 +85,11 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--primary-color);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-.items {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(4, minmax(250px, 1fr));
-  margin-top: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-
-.item {
-  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }
 
 
@@ -82,7 +100,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: var(--primary-light);
   }
   button {
     background-color: #f9f9f9;

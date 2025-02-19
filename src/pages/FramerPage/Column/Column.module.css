@@ -1,0 +1,25 @@
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+}
+
+.column.active {
+    background-color: blue;
+}
+
+.columnTitle {
+    font-size: 1.25rem;
+    font-family: var(--font-medium);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+

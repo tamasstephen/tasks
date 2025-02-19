@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { SwappyDrag } from "./pages/SwapyPage/SwappyDrag";
 import { FramerDrag } from "./pages/FramerPage/FramerDrag";
+import { motion } from "framer-motion";
 
 enum Page {
   Swappy = "swappy",
@@ -19,9 +20,9 @@ function App() {
 
   return (
     <>
-      <button onClick={changePage}>
+      <motion.button animate={{ scale: [null, 2, 1] }} onClick={changePage}>
         Open {page === Page.Swappy ? "Framer" : "Swappy"}
-      </button>
+      </motion.button>
       {page === Page.Swappy && <SwappyDrag />}
       {page === Page.Framer && <FramerDrag />}
     </>

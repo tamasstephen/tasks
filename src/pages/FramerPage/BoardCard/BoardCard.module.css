@@ -1,0 +1,80 @@
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    gap: 1rem;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.05);
+    cursor: grab;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.title {
+    font-family: var(--font-bold);
+    color: #333;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.description {
+    color: #666;
+    margin: 0;
+}
+
+.priority {
+    font-size: 0.825rem;
+    color: #666;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.priority-high {
+    background-color: var(--accent-red);
+    color: white;
+}
+
+.priority-medium {
+    background-color: var(--accent-medium);
+    color: white;
+}
+
+.priority-low {
+    background-image: linear-gradient(to right, #AFB0B3, #929396);
+    color: white;
+}
+
+.createdAt {   
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.updatedAt {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.priorityContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    text-transform: lowercase;
+}
+
+.dateContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.dateLabel {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+}

@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
 import styles from "./AddCard.module.css";
-import { Item } from "@/types";
+import { Task } from "@/types/task";
+import { Priority } from "@/types/priority";
 
 interface AddCardProps {
-  handleAddCard: (item: Omit<Item, "id" | "wrapper">) => void;
+  handleAddCard: (item: Omit<Task, "id" | "wrapper">) => void;
 }
 
-const dummyItem: Omit<Item, "id" | "wrapper"> = {
+const dummyItem: Omit<Task, "id" | "wrapper"> = {
   name: "New Card",
-  email: "newcard@example.com",
-  phone: "1234567890",
-  address: "123 Main St, Anytown, USA",
+  description: "New Card Description",
+  priority: Priority.LOW,
+  status: "todo",
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 export const AddCard = ({ handleAddCard }: AddCardProps) => {

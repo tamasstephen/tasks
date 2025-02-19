@@ -1,4 +1,4 @@
-import { Board, Item, Key } from "@/types";
+import { Board, Key } from "@/types";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Column.module.css";
@@ -46,12 +46,12 @@ export const Column = ({
     return id;
   };
 
-  const addItem = (item: Omit<Item, "id" | "wrapper">) => {
+  const addItem = (item: Omit<Task, "id" | "wrapper">) => {
     setData((prevState) => ({
       ...prevState,
       [columnId]: [
         ...prevState[columnId],
-        { ...item, id: generateUniqueId(), wrapper: columnId },
+        { ...item, id: generateUniqueId(), status: columnId },
       ],
     }));
   };

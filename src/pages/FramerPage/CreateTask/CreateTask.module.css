@@ -5,6 +5,7 @@
     box-shadow: var(--shadow);
     position: relative;
     width: 22rem;
+    z-index: 50;
 }
 
 .form {

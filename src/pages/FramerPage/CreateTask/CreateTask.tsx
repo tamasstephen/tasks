@@ -8,6 +8,8 @@ import { z } from "zod";
 import { Input } from "@/components/Form/Input/Input";
 import { TextArea } from "@/components/Form/TextArea/TextArea";
 import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -22,6 +24,9 @@ export const CreateTask = ({
   addTask: (task: Omit<Task, "id" | "status">) => void;
   onClose: () => void;
 }) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  useClickOutside(wrapperRef, onClose);
+
   const { register, handleSubmit, formState } = useForm<z.infer<typeof schema>>(
     {
       defaultValues: {
@@ -45,8 +50,22 @@ export const CreateTask = ({
   };
 
   return (
-    <motion.div layout className={styles.wrapper}>
+    <motion.div
+      animate={{ opacity: [0, 0.5, 1] }}
+      transition={{ duration: 0.3 }}
+      layout
+      className={styles.wrapper}
+      ref={wrapperRef}
+    >
       <RiCloseFill className={styles.close} size={24} onClick={onClose} />
+      <motion.h2
+        animate={{ opacity: [0, 0.5, 1] }}
+        transition={{ duration: 0.5 }}
+        layout
+        className={styles.title}
+      >
+        Create Task
+      </motion.h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           type="text"
@@ -65,7 +84,7 @@ export const CreateTask = ({
           ))}
         </select>
         <button type="submit" className={styles.button}>
-          Create Task
+          Create
         </button>
       </form>
     </motion.div>

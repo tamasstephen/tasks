@@ -7,7 +7,7 @@ import { Priority } from "@/types/priority";
 
 const cardVariants = {
   active: { backgroundColor: "rgba(0, 0, 255, 0.2)" },
-  inactive: { backgroundColor: "#fff" },
+  inactive: { backgroundColor: "#fff", opacity: [0, 0.5, 1] },
 };
 
 export const BoardCard = ({
@@ -80,6 +80,7 @@ export const BoardCard = ({
       layout
       onDragLeave={handleDragLeave}
       animate={active ? "active" : "inactive"}
+      transition={{ duration: 0.1, opacity: { ease: "easeIn" } }}
       onDragOver={handleDragOver}
       data-column-id={columnId}
       data-card-id={data.id}

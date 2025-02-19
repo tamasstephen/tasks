@@ -1,0 +1,31 @@
+
+.wrapper {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    outline: none;
+    border: 2px solid var(--primary-color);
+}
+
+.input {
+    padding: 0.5rem;
+    border: 1px solid var(--primary-light);
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input.error {
+    border: 1px solid var(--accent-red);
+}
+
+.error-text {
+    color: var(--accent-red);
+    font-size: 0.8rem;
+    margin: 0;
+    padding-top: 0.5rem;
+}

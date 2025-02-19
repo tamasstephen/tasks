@@ -5,6 +5,9 @@ import { RiCloseFill } from "@remixicon/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Input } from "@/components/Form/Input/Input";
+import { TextArea } from "@/components/Form/TextArea/TextArea";
+import { motion } from "framer-motion";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -42,44 +45,29 @@ export const CreateTask = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <motion.div layout className={styles.wrapper}>
       <RiCloseFill className={styles.close} size={24} onClick={onClose} />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <input
+        <Input
           type="text"
           placeholder="Task Name"
           {...register("name")}
-          className={`${styles.input} ${formState.errors.name && styles.error}`}
+          error={formState.errors.name?.message}
         />
-        {formState.errors.name && (
-          <p className={styles["error-text"]}>
-            {formState.errors.name.message}
-          </p>
-        )}
-        <textarea
+        <TextArea
           placeholder="Task Description"
           {...register("description")}
-          className={`${styles.textarea} ${formState.errors.description && styles.error}`}
+          error={formState.errors.description?.message}
         />
-        {formState.errors.description && (
-          <p className={styles["error-text"]}>
-            {formState.errors.description.message}
-          </p>
-        )}
         <select {...register("priority")} className={styles.select}>
           {Object.values(Priority).map((prio) => (
             <option value={prio}>{prio.toLowerCase()}</option>
           ))}
         </select>
-        {formState.errors.priority && (
-          <p className={styles["error-text"]}>
-            {formState.errors.priority.message}
-          </p>
-        )}
         <button type="submit" className={styles.button}>
           Create Task
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 };

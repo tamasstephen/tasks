@@ -1,0 +1,7 @@
+
+.error-text {
+    color: var(--accent-red);
+    font-size: 0.8rem;
+    margin: 0;
+    padding-top: 0.5rem;
+}

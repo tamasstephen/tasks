@@ -11,29 +11,9 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    box-sizing: border-box;
 }
 
-.input {
-    padding: 0.5rem;
-    border: 1px solid var(--primary-light);
-    border-radius: 5px;
-}
-
-.input.error, .textarea.error {
-    border: 1px solid var(--accent-red);
-}
-
-.textarea {
-    padding: 0.5rem;
-    border: 1px solid var(--primary-light);
-    border-radius: 5px;
-}
-
-.input:focus,
-.textarea:focus {
-    outline: none;
-    border: 2px solid var(--primary-color);
-}
 
 .select {
     padding: 0.5rem;

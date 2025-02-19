@@ -50,6 +50,8 @@ export const BoardCard = ({
         return styles["priority-medium"];
       case Priority.LOW:
         return styles["priority-low"];
+      case Priority.URGENT:
+        return styles["priority-urgent"];
     }
   };
 

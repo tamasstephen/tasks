@@ -32,6 +32,11 @@
     border-radius: 0.25rem;
 }
 
+.priority-urgent {
+    background-color: red;
+    color: white;
+}
+
 .priority-high {
     background-color: var(--accent-red);
     color: white;

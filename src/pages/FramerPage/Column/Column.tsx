@@ -5,6 +5,8 @@ import styles from "./Column.module.css";
 import { BoardCard } from "../BoardCard/BoardCard";
 import { AddCard } from "../AddCard/AddCard";
 import { Task } from "@/types/task";
+import { Portal } from "@/components/Portal/Portal";
+import { CreateTask } from "../CreateTask/CreateTask";
 
 const variants = {
   inactive: { opacity: 1, backgroundColor: "#f2f2f2" },
@@ -24,6 +26,7 @@ export const Column = ({
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const [nearestCard, setNearestCard] = useState<HTMLElement | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, item: Task) => {
     e.dataTransfer.setData("item", JSON.stringify(item));
   };
@@ -46,7 +49,7 @@ export const Column = ({
     return id;
   };
 
-  const addItem = (item: Omit<Task, "id" | "wrapper">) => {
+  const addItem = (item: Omit<Task, "id" | "status">) => {
     setData((prevState) => ({
       ...prevState,
       [columnId]: [
@@ -131,30 +134,37 @@ export const Column = ({
   };
 
   return (
-    <motion.div
-      variants={variants}
-      layout
-      animate={active ? "active" : "inactive"}
-      transition={{ duration: 0.2, opacity: { ease: "easeInOut" } }}
-      className={styles.column}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      onDragLeave={handleDragLeave}
-    >
-      <div className={styles.columnTitle}>
-        {columnId.charAt(0).toUpperCase() + columnId.slice(1)}
-      </div>
-      <AddCard handleAddCard={addItem} />
-      {data.map((item) => (
-        <BoardCard
-          key={item.id}
-          data={item}
-          columnId={columnId}
-          handleDragStart={handleDragStart}
-          setNearestCard={setNearestCard}
-          nearestCard={nearestCard}
-        />
-      ))}
-    </motion.div>
+    <>
+      {isOpen && (
+        <Portal>
+          <CreateTask addTask={addItem} onClose={() => setIsOpen(false)} />
+        </Portal>
+      )}
+      <motion.div
+        variants={variants}
+        layout
+        animate={active ? "active" : "inactive"}
+        transition={{ duration: 0.2, opacity: { ease: "easeInOut" } }}
+        className={styles.column}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onDragLeave={handleDragLeave}
+      >
+        <div className={styles.columnTitle}>
+          {columnId.charAt(0).toUpperCase() + columnId.slice(1)}
+        </div>
+        <AddCard handleAddCard={() => setIsOpen(true)} />
+        {data.map((item) => (
+          <BoardCard
+            key={item.id}
+            data={item}
+            columnId={columnId}
+            handleDragStart={handleDragStart}
+            setNearestCard={setNearestCard}
+            nearestCard={nearestCard}
+          />
+        ))}
+      </motion.div>
+    </>
   );
 };

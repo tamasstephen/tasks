@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { initialState } from "../../data/data";
-import styles from "./FramerDrag.module.css";
+import styles from "./Board.module.css";
 import { LayoutGroup } from "framer-motion";
 import { Board, Key } from "../../types";
 import { Column } from "./Column/Column";

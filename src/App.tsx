@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { SwappyDrag } from "./pages/SwapyPage/SwappyDrag";
-import { FramerDrag } from "./pages/FramerPage/FramerDrag";
+import { FramerDrag } from "./pages/FramerPage/Board";
 import { motion } from "framer-motion";
 
 enum Page {

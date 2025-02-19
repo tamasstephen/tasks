@@ -21,7 +21,7 @@ export const AddCard = ({ handleAddCard }: AddCardProps) => {
         whileHover={{ scale: 1.05 }}
         onClick={() => handleAddCard(dummyItem)}
       >
-        Add Card
+        Add Task
       </motion.button>
     </div>
   );

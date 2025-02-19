@@ -3,20 +3,20 @@
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
-    padding-right: 1rem;
-    overflow-x: visible;
-    width: 100%;
     box-sizing: border-box;
 }
 
 .board-inner {
-    display: grid;
-    grid-template-columns: repeat(6, 300px);
-    gap: 1rem;
     width: 100%;
-    padding-right: 1rem;
-    overflow-x: visible;
+    display: grid;
+    grid-template-columns: repeat(6, 300px) 20px;
+    gap: 1rem;
     padding-right: 1rem;
     box-sizing: border-box;
+}
+
+.spacer {
+    width: 20px;
+    height: 100%;
 }
 

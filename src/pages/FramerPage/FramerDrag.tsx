@@ -23,6 +23,7 @@ export const FramerDrag = () => {
               />
             ))}
           </LayoutGroup>
+          <div className={styles.spacer}> </div>
         </div>
       </div>
     </Wrapper>
